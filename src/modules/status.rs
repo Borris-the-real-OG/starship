@@ -129,6 +129,8 @@ fn format_exit_code<'a>(
             .map_meta(|var, _| match var {
                 "symbol" => match exit_code_int {
                     0 => Some(config.success_symbol),
+                    1 if config.map_symbol => Some(config.error_symbol),
+                    2 if config.map_symbol => Some(config.access_symbol),
                     126 if config.map_symbol => Some(config.not_executable_symbol),
                     127 if config.map_symbol => Some(config.not_found_symbol),
                     130 if config.recognize_signal_code && config.map_symbol => {
